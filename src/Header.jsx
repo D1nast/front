@@ -4,12 +4,11 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {Link}  from '@mui/material';
 
-
 const drawerWidth = 240;
+// タブのリンク
 const navItems = [
     { name: 'Home', href: '/' },
     { name: 'News', href: '/news' },
@@ -32,20 +31,21 @@ function Header(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor:'#CCB3B7'}}>
-        <Toolbar>
-          {/* ここからヘッダー */}
-          <Typography variant="h" component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block',color:'#22292C'}}}>
-            仮想通貨情報サイト
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+      <AppBar component="nav" sx={{ backgroundColor:'hsla(0, 0%, 7%, 0.94)'}}>
+        {/* ツールバーのフレックスはどうするかまだ決めていない */}
+        <Toolbar style={{display:'flex'}}>
+          <div style={{fontSize:'30px',fontWeight:'100',fontFamily:'Poppins,Arial,sans-serif',flex:'0 0 900px'}}>
+            CRYPT PORTAL
+            </div>
+          <Box sx={{ display: { xs: 'none', sm: 'block',flex:'auto'} }}>
             {navItems.map((item) => (
-              <Button key={item.name} component={Link} href={item.href} sx={{ color: '#22292C' }}>
+              <Button key={item.name} component={Link} href={item.href} sx={{ color: '#FFFFFF' }}>
                 {item.name}
               </Button>
             ))}
           </Box>
         </Toolbar>
+        {/*  */}
       </AppBar>
       <nav>
         <Drawer

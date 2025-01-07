@@ -6,87 +6,43 @@ import Typography from '@mui/material/Typography'
 // CSS setup
 
 export default function Ranking () {
-    const [coins,setCoindata] = useState({
-         coin:{rank:"",name:"",marketCap:"",price:""},
-    });
+  // APIを取得する配列の初期設定
+    const [coins,setCoindata] = useState([]);
+    // 値に小数点とカンマを付加する
+    const convertNum =( num )=>{
+      const convert = (Math.round((num))/100000)
+      console.log(convert);
+      return convert.toLocaleString();
+    };
+      // データ取得
       useEffect(() => {
         const fetchCoin = async () => {
           const url =`${process.env.REACT_APP_API}`
             const response = await axios.get(url);
-            const coinData =await response.data.data.reduce((acc,response,index)=>{
-                const coinKey = `coin${index+1}`;
-                acc[coinKey]={
-                    rank:response.rank,
-                    name:response.name,
-                    marketCap:Math.ceil(response.marketCapUsd).toLocaleString(),
-                    price:response.priceUsd
-                };
-                return acc;
-            },{});
-            setCoindata(coinData);
+            setCoindata(response.data.data);
         }
-        fetchCoin()    
+        fetchCoin();
         },[]);
         return (
-            <div style={{ padding: '100px', textAlign: 'center', backgroundColor: '#f5f5f5' }}>
-              <Typography variant="h4" color="text.secondary" paddingBottom="80px">
-                時価総額ランキング
-              </Typography>
+            <div style={{ paddingTop:'50px',textAlign: 'center', backgroundColor: '#000000' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                {/* ヘッダー */}
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: '80%',
-                  padding: '10px',
-                  borderBottom: '2px solid #ddd',
-                  backgroundColor: '#e0e0e0'
-                }}>
-                  <div style={{ flex: 1, textAlign: 'left' }}>
-                    <Typography variant="h6" component="div" fontWeight="bold">
-                      順位
-                    </Typography>
-                  </div>
-                  <div style={{ flex: 2, textAlign: 'center' }}>
-                    <Typography variant="h6" component="div" fontWeight="bold">
-                      銘柄
-                    </Typography>
-                  </div>
-                  <div style={{ flex: 2, textAlign: 'right' }}>
-                    <Typography variant="h6" component="div" fontWeight="bold">
-                      時価総額
-                    </Typography>
-                  </div>
-                </div>
-                {/* データ行 */}
-                {Object.keys(coins).map((key) => {
-                  const coin = coins[key];
-                  return (
-                    <div key={key} style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      width: '80%',
-                      padding: '10px',
-                      borderBottom: '1px solid #ddd'
-                    }}>
-                      <div style={{ flex: 1, textAlign: 'left' }}>
-                        <Typography variant="h5" component="div">
-                          {coin.rank}
-                        </Typography>
+                {coins.map((coin)=>{
+                  console.log(coin)
+                  return(
+                    <div  style={{display: 'flex',flexDirection: 'row',alignItems: 'center',justifyContent: 'space-between',
+                      width: '80%',padding: '10px',borderBottom: '1px solid #ddd'}}>
+                      <div style={{color:'white'}}>
+                        <Typography variant="h5" component="div">{coin.rank}</Typography>
                       </div>
-                      <div style={{ flex: 2, textAlign: 'center' }}>
-                        <Typography variant="h5" component="div">
-                          {coin.name}
-                        </Typography>
+                      <div style={{ flex: 2, textAlign: 'center',color:'white' }}>
+                        <Typography variant="h5" component="div"> {coin.name} ({coin.symbol}) </Typography>
                       </div>
-                      <div style={{ flex: 2, textAlign: 'right' }}>
-                        <Typography variant="body2" color="text.secondary">
-                          ${coin.marketCap}
-                        </Typography>
+                      <div style={{ flex: 2, textAlign: 'center',color:'white' }}>
+                        {/* 小数点を出すために、10,000倍して、四捨五入　→ 割り算 */}
+                        <Typography variant="h5" component="div"> ${convertNum(coin.priceUsd*100000)} </Typography>
+                      </div>
+                      <div style={{ flex: 2, textAlign: 'right',color:'white' }}>
+                        <Typography variant="h5">${convertNum(coin.marketCapUsd)}</Typography>
                       </div>
                     </div>
                   );

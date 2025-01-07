@@ -1,8 +1,9 @@
 import { React,useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 // import {Link}  from '@mui/material';
 // import Button from '@mui/material/Button';
 
@@ -10,9 +11,8 @@ import Box from '@mui/material/Box';
 export default function SignUp(){
     const [email,setEmail] = useState("");
     const [pass,setPass] = useState("");
+    const [passwordType,setPasswordType] = useState("password");
 
-    const navigate = useNavigate();
-    
     const onClick = async () => {
         const url = `${process.env.REACT_APP_API}/create`;
         try{
@@ -60,8 +60,10 @@ export default function SignUp(){
                 <div>
                     <input value={email} placeholder="Mail" onChange={(e) => setEmail(e.target.value)} style={{ width: "400px" }}/>
                 </div>
-                <div style={{marginTop:'50px'}}>
-                    <input value={pass} placeholder="Pass(６文字以上)" onChange={(e) => setPass(e.target.value)} style={{ width: "400px"}}/>
+                <div style={{marginTop:'50px',display:'flex',alignItems:'center',maxWidth:'400px'}}>
+                    <input value={pass} placeholder="Pass(６文字以上)" type={passwordType} onChange={(e) => setPass(e.target.value)} style={{ width: "400px"}}/>
+                    {passwordType === "password" && (<VisibilityOffIcon style={{paddingLeft:"5px"}} onClick={() => setPasswordType("text")} className="Password__visual"/>)}
+                    {passwordType === "text" && (<VisibilityIcon style={{paddingLeft:"5px"}} onClick={() => setPasswordType("password")} className="Password__visual"/>)}
                 </div> 
                 <div style={{ marginTop: "20px" }}>
                     <button onClick={onClick}>ユーザー登録</button>
@@ -69,8 +71,10 @@ export default function SignUp(){
                     <button onClick={onClickDelete}>ユーザー削除</button>
                 </div>
                 </div>
-            </div>     
-        </Box>         
+            </div>    
+             
+        </Box> 
+                
     );
 }
 
