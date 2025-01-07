@@ -1,6 +1,5 @@
 import { React,useEffect,useState } from "react";
 import axios from 'axios';
-//React
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -44,96 +43,50 @@ export default function NewsAPI(){
             const request = await axios.get(url);
             const response = await request.data.articles
             setNews(response);
-            console.log(response);
+
         };
         fetchNews(); 
     },[]);
     return(
-        <>
-        <div style={{margin:'100px 0 20px 0' ,textAlign:'center'}}>
-            <Typography variant="h4" color="text.secondary" margin="15px">注目記事</Typography>
+        <div style={{backgroundColor:'#000000'}}>
+        {/* 上部はニュース切り替えタブ */}
+        <div style={{marginTop:'40px',paddingTop:'20px',textAlign:'center'}}>
+            <Typography variant="h4" color='#FFFFFF' margin="15px">News</Typography>
         </div>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Tabs value={value} onChange={handleChange} centered>
-          <Tab label="1" {...a11yProps(0)} />
-          <Tab label="2" {...a11yProps(1)} />
-          <Tab label="3" {...a11yProps(2)} />
-          <Tab label="4" {...a11yProps(3)} />
+        <Tabs value={value} sx={{'& .MuiTabs-indicator':{backgroundColor:'white'}}} onChange={handleChange} centered>
+          <Tab label="1" sx={{color:'white','&.Mui-selected':{color:'white'}}} {...a11yProps(0)} />
+          <Tab label="2" sx={{color:'white','&.Mui-selected':{color:'white'}}} {...a11yProps(1)} />
+          <Tab label="3" sx={{color:'white','&.Mui-selected':{color:'white'}}} {...a11yProps(2)} />
+          <Tab label="4" sx={{color:'white','&.Mui-selected':{color:'white'}}} {...a11yProps(3)} />
         </Tabs>
         </Box>
+        {/* 下部はニュース部分 */}
         <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap',paddingTop:'30px', justifyContent: 'center'}}>
-        {news.slice(0,5).map((res,key)=>{
-            return(
-                <CustomTabPanel key={key} value={value} index={0}>
-                <Card key={key} sx={{ maxWidth: 400, marginBottom:2}}>
-                    <a href={res.url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', textDecoration: 'none' }}>
-                        <CardMedia sx={{height:220,objectFit:'cover',}} image={res.urlToImage}/>
-                    </a>
-                    <CardContent>
-                        <Typography>author&nbsp;&nbsp;:&nbsp;&nbsp;{res.author}</Typography>
-                        <Typography variant="h6">{res.title}</Typography>
-                        <Typography variant="h6">{res.description}</Typography>
-                    </CardContent>
-                </Card> 
-                </CustomTabPanel>
-            );
-        })}
+        {/*　配列左は記事取得開始位置、右はページのインデックス  */}
+        {[[0,0],[8,1],[16,2],[24,3]].map(( Articles )=>{
+            return news.slice( Articles[0],Articles[0]+8 ).map((res,key) => {
+                return(
+                    // 各ニュースカード部分
+                    <CustomTabPanel key={Articles} value={value} index={Articles[1]}>
+                    <Card key={key} sx={{ maxWidth: 260,maxHeight:400,marginBottom:2}}>
+                        {/* サムネイル */}
+                        <a href={res.url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', textDecoration: 'none' }}>
+                            <CardMedia sx={{height:160,objectFit:'cover',}} image={res.urlToImage}/>
+                        </a>
+                        {/* 記事 */}
+                        <CardContent sx={{paddingTop:'1px'}}>
+                            <Typography variant="h7" sx={{fontWeight:'bold',marginBottom:2}}>{res.title}</Typography>
+                            <Typography>{res.description}</Typography>
+                        </CardContent>
+                    </Card> 
+                    </CustomTabPanel>
+                );
+            })
+        })
+        }
         </div>
-        <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap',paddingTop:'30px', justifyContent: 'center'}}>
-        {news.slice(5,10).map((res,key)=>{
-            return(
-                <CustomTabPanel key={key} value={value} index={1}>
-                <Card key={key} sx={{ maxWidth: 400, marginBottom:2}}>
-                    <a href={res.url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', textDecoration: 'none' }}>
-                        <CardMedia sx={{height:220,objectFit:'cover',}} image={res.urlToImage}/>
-                    </a>
-                    <CardContent>
-                        <Typography>author&nbsp;&nbsp;:&nbsp;&nbsp;{res.author}</Typography>
-                        <Typography variant="h6">{res.title}</Typography>
-                        <Typography variant="h6">{res.description}</Typography>
-                    </CardContent>
-                </Card> 
-                </CustomTabPanel>
-            );
-        })}
-        </div>     
-        <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap',paddingTop:'30px', justifyContent: 'center'}}>
-        {news.slice(10,15).map((res,key)=>{
-            return(
-                <CustomTabPanel key={key} value={value} index={2}>
-                <Card key={key} sx={{ maxWidth: 400, marginBottom:2}}>
-                    <a href={res.url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', textDecoration: 'none' }}>
-                        <CardMedia sx={{height:220,objectFit:'cover',}} image={res.urlToImage}/>
-                    </a>
-                    <CardContent>
-                        <Typography>author&nbsp;&nbsp;:&nbsp;&nbsp;{res.author}</Typography>
-                        <Typography variant="h6">{res.title}</Typography>
-                        <Typography variant="h6">{res.description}</Typography>
-                    </CardContent>
-                </Card> 
-                </CustomTabPanel>
-            );
-        })}
-        </div> 
-        <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap',paddingTop:'30px', justifyContent: 'center'}}>
-        {news.slice(15,20).map((res,key)=>{
-            return(
-                <CustomTabPanel key={key} value={value} index={3}>
-                <Card key={key} sx={{ maxWidth: 400, marginBottom:2}}>
-                    <a href={res.url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', textDecoration: 'none' }}>
-                        <CardMedia sx={{height:220,objectFit:'cover',}} image={res.urlToImage}/>
-                    </a>
-                    <CardContent>
-                        <Typography>author&nbsp;&nbsp;:&nbsp;&nbsp;{res.author}</Typography>
-                        <Typography variant="h6">{res.title}</Typography>
-                        <Typography variant="h6">{res.description}</Typography>
-                    </CardContent>
-                </Card> 
-                </CustomTabPanel>
-            );
-        })}
-        </div>       
-        </>
+        </div>
     )
 }
 
