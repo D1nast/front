@@ -8,8 +8,8 @@ import Footer from './Layout/Footer.jsx';
 import NewsAPI from './LpComponent/News.jsx';
 import LP from './LP.jsx';
 import SignUp from './Signup.jsx';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
