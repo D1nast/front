@@ -1,9 +1,6 @@
 import { React,useEffect,useState } from "react";
 import axios from 'axios';
-//React setup
-
 import Typography from '@mui/material/Typography'
-// CSS setup
 
 export default function Ranking () {
   // APIを取得する配列の初期設定
@@ -11,7 +8,6 @@ export default function Ranking () {
     // 値に小数点とカンマを付加する
     const convertNum =( num )=>{
       const convert = (Math.round((num))/100000)
-      console.log(convert);
       return convert.toLocaleString();
     };
       // データ取得
@@ -24,7 +20,7 @@ export default function Ranking () {
         fetchCoin();
         },[]);
         return (
-            <div style={{ paddingTop:'50px',textAlign: 'center', backgroundColor: '#000000' }}>
+            <div style={{ paddingTop:'50px',paddingBottom:'50px',textAlign: 'center', backgroundColor: '#000000' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 {coins.map((coin)=>{
                   console.log(coin)
