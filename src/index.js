@@ -3,13 +3,11 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
-import Header from './Header.jsx';
-import Footer from './Footer.jsx';
-import NewsAPI from './News.jsx';
-// import SignIn from './SignIn.jsx';
+import Header from './Layout/Header.jsx';
+import Footer from './Layout/Footer.jsx';
+import NewsAPI from './LpComponent/News.jsx';
 import LP from './LP.jsx';
 import SignUp from './Signup.jsx';
-// import UserPage from './UserPage.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,9 +17,7 @@ root.render(
       <Routes>
         <Route index element={<LP />}/>
         <Route path="/news" element={<NewsAPI />}/>
-        {/* <Route path="/signin" element={<SignIn />}/> */}
         <Route path="/signup" element={<SignUp />}/>
-        {/* <Route path="/user" element={<UserPage />}/> */}
       </Routes>
     <Footer/>
     </BrowserRouter>

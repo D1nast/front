@@ -1,15 +1,12 @@
 import React from "react";
-import FeaturedCurrency from "./FeaturedCurrency"
-import Ranking from "./Ranking";
-import Tester from "./Tester";
-import News from "./News";
+import Ranking from "./LpComponent/Ranking";
+import News from "./LpComponent/News";
 export default function LP(){
     return(
         <React.Fragment>
-            <Tester />
             <News/>
             <Ranking />
-            <FeaturedCurrency />
+            {/* <FeaturedCurrency /> */}
         </React.Fragment>
     );
 };
