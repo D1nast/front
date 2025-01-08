@@ -6,7 +6,6 @@ export default function LP(){
         <React.Fragment>
             <News/>
             <Ranking />
-            {/* <FeaturedCurrency /> */}
         </React.Fragment>
     );
 };

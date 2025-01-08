@@ -1,37 +1,40 @@
 import React from 'react';
 import { FaGithub } from 'react-icons/fa'; 
 import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
 import ScrollToTopButton from './ScrollTop'; 
 import { Typography } from '@mui/material';
 
 const Footer = () => {
   return (
-        <footer style={{ backgroundColor: '#000000', color: 'white', padding: '20px 0' }}>
+        <Box sx={{ backgroundColor: '#000000', color: 'white', padding:{xs:'0',sm:'20px'}}}>
             <div style={{display:'flex',height:'auto',width:'100%'}}>
 
                 {/* フッターの左半分 CNの画像 */}
-                <div style={{flex:'2',paddingLeft:'80px',width:'30%'}}>
+                <Box sx={{display:{xs:'none',sm:'block'}}} style={{flex:'2',paddingLeft:'80px',width:'30%'}}>
                     <img src="/cnicon.png" alt="Description" style={{ width: '80%', height: 'auto' }} />
-                </div>
+                </Box>
 
                 {/* フッタの右半分　サイト説明 */}
-                <div style={{flex:'8'}}>
-                    <Typography variant="h6" style={{borderBottom:'2px solid white',display:'inline-block',width:'150px'}}>
+                <Box sx={{paddingLeft:{xs:'20px',sm:'0'},flex:'8'}}>
+                    <Box sx={{display:{xs:'flex',sm:'block'},flexDirection:{xs:'column',sm:'none'}}}>
+                    <Typography variant="h5" sx={{borderBottom:'2px solid white',display:'inlin-block',width:'150px',marginBottom:{xs:'20px',sm:'none'},fontSize:{xs:'50px',sm:'20px'}}}>
                         About
                     </Typography>
-                    <p>Delivering the latest news on cryptcurrency.<br/>
+                    <Typography sx={{fontSize:{xs:'20px',sm:'20px'}}}>
+                        Delivering the latest news on cryptcurrency.<br/>
                         The news we provide is within the last 24 hours.
-                    </p>
-                    <Link href="https://github.com/D1nast" target="_blank" rel="noopener noreferrer" marginTop={'10px'}>
+                    </Typography>
+                    <Link href="https://github.com/D1nast" target="_blank" rel="noopener noreferrer" 
+                    sx={{padding:{xs:'20px 0px 20px 20px',sm:'10px'},display:'block',}}>
                      <FaGithub size={24} color="#ffffff" />
                     </Link>
-                    <Link>
-                    </Link>
-                </div>
+                    </Box>
+                </Box>
             </div>
             {/* 画面最上部までスクロールする */}
             <ScrollToTopButton />
-        </footer>
+        </Box>
   );
 }
 
