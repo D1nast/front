@@ -11,41 +11,35 @@ export default function SignUp(){
     const [pass,setPass] = useState("");
     const [passwordType,setPasswordType] = useState("password");
 
-    const onClick = async () => {
+    const register = async () => {
         const url = `${process.env.REACT_APP_API}/create`;
+        const reqBody = { user: { email, password: pass, password_confirmation: pass } };
         try{
-            const reqBody = { user: { email, password: pass, password_confirmation: pass } };
-            const signup = await axios.post(url,reqBody);
-            await signup
-            console.log(reqBody);
+            await axios.post(url,reqBody);
             //右の形でパラメータが送られる　user:{email,password, password_confirmation}
-            alert("Thank you for dicribing")
+            alert("Thank you for subscribing!")
         }catch{
             alert("以下3つのいずれか当てはまるため、登録できません\n\n・既に登録済\n・無効なアドレス\n・パスワードが6文字以下")
         }
     };
     //メール配信の登録と解除
-    const onClickDeliver = async () => {
+    const changeDeliver = async () => {
         const url = `${process.env.REACT_APP_API}/change`;
+        const reqBody = { user: { email, password: pass, password_confirmation: pass } };
         try{
-            const reqBody = { user: { email, password: pass, password_confirmation: pass } };
-            const signup = await axios.post(url,reqBody);
-            await signup
-            alert(signup.data)
-        }catch{
-            alert("ユーザー登録がされていないか、メールアドレスもしくはパスワードが誤っています")
-        }
+            const query = await axios.post(url,reqBody);
+            alert(query.data)}
+        catch{ alert("Either the user is not registered, or the email address or password is incorrect.")}
     };
-    //ユーザー登録削除
-    const onClickDelete = async () => {
+    //ユーザー削除
+    const Delete = async () => {
         const url = `${process.env.REACT_APP_API}/delete`;
+        const reqBody = { user: { email, password: pass, password_confirmation: pass } };
         try{
-            const reqBody = { user: { email, password: pass, password_confirmation: pass } };
-            const deleteUser = await axios.post(url,reqBody);
-            await deleteUser;
+            await axios.post(url,reqBody);
             alert("executed!")
         }catch{
-            alert("ユーザー登録がされていないか、メールアドレスもしくはパスワードが誤っています")
+            alert("Either the user is not registered, or the email address or password is incorrect.")
         }
     };
 
@@ -62,6 +56,7 @@ export default function SignUp(){
                     <Input value={email} placeholder=" Mail" onChange={(e) => setEmail(e.target.value)} 
                     sx ={{backgroundColor:'white',width:{xs:'250px',sm:'400px'},height:{xs:'20px',sm:'20px'}}} />
                 </Box>
+
                 {/* パスワード入力 */}
                 <Box sx={{marginTop:'50px',display:'flex',alignItems:'center',maxWidth:'400px'}}>
                     {/* <input value={pass} placeholder="Pass(６文字以上)" type={passwordType} onChange={(e) => setPass(e.target.value)} style={{ width: "400px"}}/> */}
@@ -69,20 +64,21 @@ export default function SignUp(){
                     sx ={{backgroundColor:'white',width:{xs:'225px',sm:'400px'},height:{xs:'20px',sm:'20px'}}} />
                     {passwordType === "password" && (<VisibilityOffIcon sx={{marginLeft:"8px",backgroundColor:'white',maxHeight:'20px'}} onClick={() => setPasswordType("text")} className="Password__visual"/>)}
                     {passwordType === "text" && (<VisibilityIcon sx={{marginLeft:"8px",backgroundColor:'white',maxHeight:'20px'}} onClick={() => setPasswordType("password")} className="Password__visual"/>)}
-                </Box> 
+                </Box>
+                 
                 {/* ボタン */}
                 <Box style={{ marginTop: "20px" }}>
-                    <button onClick={onClick}>subscribe</button>
-                    <button onClick={onClickDeliver}>stop / resume</button>
-                    <button onClick={onClickDelete}>delete</button>
+                    <button onClick={register}>Subscribe</button>
+                    <button onClick={changeDeliver}>Stop / Resume</button>
+                    <button onClick={Delete}>Delete</button>
                 </Box>
                 </Box>
             </Box>
             {/* 各ボタン説明 */}
             <Box sx={{marginTop:'50px',display:'flex',flexDirection:'column',alignItems:'center'}}>
-                <Typography sx={{marginBottom:"20px",color:'#FFFFFF'}}>subscribe : Register your email address</Typography>
-                <Typography sx={{marginBottom:"20px",color:'#FFFFFF'}}>stop / resume : Stop delivering email. If you've already stopped,resume delivering.</Typography>
-                <Typography sx={{marginBottom:"20px",color:'#FFFFFF'}}>delete : Delete your email address</Typography>
+                <Typography sx={{marginBottom:"20px",color:'#FFFFFF'}}>Subscribe : Register your email address</Typography>
+                <Typography sx={{marginBottom:"20px",color:'#FFFFFF'}}>Stop / resume : Stop delivering email. If you've already stopped,resume delivering.</Typography>
+                <Typography sx={{marginBottom:"20px",color:'#FFFFFF'}}>Delete : Delete your email address</Typography>
             </Box>
         </Box> 
                 

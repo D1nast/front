@@ -61,6 +61,7 @@ export default function NewsAPI(){
             <Tab label="4" sx={{color:'white','&.Mui-selected':{color:'white'}}} {...a11yProps(3)} />
             </Tabs>
         </Box>
+        
         {/* 下部はニュース部分 */}
         <Box sx={{display:'flex',flexDirection:'row',flexWrap:'wrap',paddingTop:{xs:'5px',sm:'30px'}, justifyContent: 'center'}}>
         {/*　配列左は記事取得開始位置、右はページのインデックス  */}
