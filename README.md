@@ -10,6 +10,7 @@
 - [インフラ](#インフラ)
 - [API](#API)
 - [開発にあたり注意した点](#開発にあたり注意した点)
+- [ページ画面](#ページ画面)
   
 ## フロントエンド
 - React v18.3.1
@@ -35,4 +36,10 @@
 要素の配置を後から見直しにくなってしまったりと不都合が生じやすいと考えました。</br>
 以上の理由から、コードの修正をしやすく、見た目も良くなるMaterial-UIを利用しました
 
-  ##
+## ページ画面
+![ニュース](https://github.com/user-attachments/assets/f86c83e3-0b58-42ec-bad1-77183d1dc60f)
+![時価総額](https://github.com/user-attachments/assets/d667941c-5146-4434-ac86-160e3ab7a567)
+![ユーザー登録](https://github.com/user-attachments/assets/29f02d31-6e7d-44ed-9cd8-d9b09c8410f3)
+
+
+
