@@ -5,15 +5,21 @@
 本サイト上段にはNews APIから取得したニュースを、中段には時価総額ランキングを表示します。</br>
 
 ## 目次
+- [画面イメージ](#画面イメージ)
 - [フロントエンド](#フロントエンド)
 - [バックエンド](#バックエンド)
 - [インフラ](#インフラ)
 - [API](#API)
 - [開発にあたり注意した点](#開発にあたり注意した点)
-- [画面イメージ](#画面イメージ)
 - [生成AIの使用について](#生成AIの使用について)
 - [参考文献](#参考文献)
-  
+
+
+## 画面イメージ
+![ニュース](https://github.com/user-attachments/assets/f86c83e3-0b58-42ec-bad1-77183d1dc60f)
+![時価総額](https://github.com/user-attachments/assets/d667941c-5146-4434-ac86-160e3ab7a567)
+![ユーザー登録](https://github.com/user-attachments/assets/29f02d31-6e7d-44ed-9cd8-d9b09c8410f3)
+
 ## フロントエンド
 - React v18.3.1
 - Material-UI
@@ -34,11 +40,6 @@ HTTPリクエストはHTTPSにリダイレクトされるよう制御をかけ�
   ①適宜コードの挙動のコメントを残す</br>
   ②各コンポーネントがどこにあるかわかりやすいようなディレクトリ分け</br>
   ③コードの行数を減らす意識</br>
-
-## 画面イメージ
-![ニュース](https://github.com/user-attachments/assets/f86c83e3-0b58-42ec-bad1-77183d1dc60f)
-![時価総額](https://github.com/user-attachments/assets/d667941c-5146-4434-ac86-160e3ab7a567)
-![ユーザー登録](https://github.com/user-attachments/assets/29f02d31-6e7d-44ed-9cd8-d9b09c8410f3)
 
 ## 生成AIの使用について
 HTMLの構成に関わる部分(div等)のみ生成AIを活用して作成しています。</br>
