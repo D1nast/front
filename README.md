@@ -19,8 +19,10 @@
 - Ruby v3.1.2
 - Rails v6.1.7.8
 ## インフラ 
-データベースをRDSにできればそれがベストでしたが、費用がかかるゆえEC2インスタンス内にしました
-## API
+インフラ図は以下の通りです。</br>
+HTTP通信はHTTPSにリダイレクトされるよう制御をかけています</br>
+<img width="465" alt="Crypt Portalインフラ" src="https://github.com/user-attachments/assets/5b410645-9adb-4e10-a68b-c0ed893b1892" />
+## APIについて
 - CoinCap API2.0
 - NewsAPI
   
